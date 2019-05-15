@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
+import 'package:flutter_vayes/pages/register_page.dart';
 import './pages/home_page.dart';
 import './pages/login_page.dart';
 
@@ -10,6 +11,7 @@ class MyApp extends StatelessWidget {
     LoginPage.tag: (context) => LoginPage(),
     HomePage.tag: (context) => HomePage(),
     ForgetPasswordPage.tag: (context) => ForgetPasswordPage(),
+    RegisterPage.tag: (context) => RegisterPage(),
   };
 
   @override

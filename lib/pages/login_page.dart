@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/home_page.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
+import 'package:flutter_vayes/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   static String tag = 'login-page';
@@ -69,6 +70,16 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    final registerLabel = FlatButton(
+      child: Text(
+        'Register',
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () {
+        Navigator.of(context).pushNamed(RegisterPage.tag);
+      },
+    );
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -83,7 +94,14 @@ class _LoginPageState extends State<LoginPage> {
             password,
             SizedBox(height: 24.0),
             loginButton,
-            forgotLabel
+            Center(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  forgotLabel,registerLabel
+                ],
+              ),
+            ),
           ],
         ),
       ),

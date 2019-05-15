@@ -1,22 +1,32 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class ForgetPasswordPage extends StatefulWidget {
-  static String tag = 'forget-password-page';
+class RegisterPage extends StatefulWidget {
+  static String tag = 'register-page';
   @override
-  _ForgetPasswordPage createState() => new _ForgetPasswordPage();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _ForgetPasswordPage extends State<ForgetPasswordPage>{
+class _RegisterPageState extends State<RegisterPage> {
   @override
-  Widget build(BuildContext context)
-  {
+  Widget build(BuildContext context) {
     final logo = Hero(
       tag: 'hero',
       child: CircleAvatar(
         backgroundColor: Colors.transparent,
         radius: 54.0,
         child: Image.asset('assets/logo.png'),
+      ),
+    );
+
+    final name = TextFormField(
+      keyboardType: TextInputType.text,
+      autofocus: true,
+      initialValue: 'Bünyamin Kocadere',
+      decoration: InputDecoration(
+        hintText: 'Name',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
       ),
     );
 
@@ -31,7 +41,18 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage>{
       ),
     );
 
-    final loginButton = Padding(
+    final password = TextFormField(
+      autofocus: false,
+      initialValue: 'qwertqwer',
+      obscureText: true,
+      decoration: InputDecoration(
+        hintText: 'Password',
+        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
+    );
+
+    final registerButton = Padding(
       padding: EdgeInsets.symmetric(vertical: 16.0),
       child: RaisedButton(
         shape: RoundedRectangleBorder(
@@ -42,7 +63,7 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage>{
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
+        child: Text('Register', style: TextStyle(color: Colors.white)),
       ),
     );
 
@@ -55,9 +76,13 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage>{
           children: <Widget>[
             logo,
             SizedBox(height: 48.0),
+            name,
+            SizedBox(height: 24.0),
             email,
             SizedBox(height: 24.0),
-            loginButton,
+            password,
+            SizedBox(height: 24.0),
+            registerButton,
           ],
         ),
       ),
