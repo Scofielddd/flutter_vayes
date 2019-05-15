@@ -23,7 +23,7 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage>{
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'adere@gmail.com',
+      initialValue: 'b.nkocadere@gmail.com',
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -38,17 +38,12 @@ class _ForgetPasswordPage extends State<ForgetPasswordPage>{
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          AlertDialog(title: Text("asd"),);
-          //Navigator.of(context).pop();
+          Navigator.of(context).pop();
         },
         padding: EdgeInsets.all(12),
         color: Colors.lightBlueAccent,
         child: Text('Log In', style: TextStyle(color: Colors.white)),
       ),
-    );
-
-    final body = Container(
-
     );
 
     return Scaffold(

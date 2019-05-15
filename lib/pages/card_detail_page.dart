@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vayes/models/photo.dart';
 
 class CardDetailPage extends StatelessWidget {
   static String tag = 'card-detail-page';
 
-  int index;
-  CardDetailPage(index){
-    this.index = index;
+  Photo photo;
+  CardDetailPage(photo){
+    this.photo = photo;
   }
 
 
@@ -17,14 +18,42 @@ class CardDetailPage extends StatelessWidget {
         slivers: <Widget>[
           SliverAppBar(
             expandedHeight: 250,
-            pinned: true,
+            flexibleSpace: FlexibleSpaceBar(
+              background: Image.network(
+                photo.url
+              ),
+            ),
+            floating: false,
+            pinned: false,
             primary: true,
-            title: Text("Card Detail"),
+            title: Text(this.photo.title),
           ),
+
 
           SliverToBoxAdapter(
             child: SingleChildScrollView(
-              child: Text("Descasdasdasdasd."),
+              child: Column(
+                children: <Widget>[
+                  Text(photo.title),
+                  Image.network(
+                    photo.url
+                  ),
+                  Image.network(
+                    photo.thumbnailUrl
+                  ),
+                  Text("Album ID :"+photo.albumId.toString()),
+                  Text("Photo ID :"+photo.id.toString()),
+                  Text(photo.title),
+                  Image.network(
+                      photo.url
+                  ),
+                  Image.network(
+                      photo.thumbnailUrl
+                  ),
+                  Text("Album ID :"+photo.albumId.toString()),
+                  Text("Photo ID :"+photo.id.toString()),
+                ],
+              ),
             ),
           ),
         ],

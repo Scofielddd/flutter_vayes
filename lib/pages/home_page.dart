@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_vayes/data/remote_api.dart';
+import 'package:flutter_vayes/models/photo.dart';
 
 import 'card_detail_page.dart';
 
@@ -7,47 +9,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final alucard = Hero(
-      tag: 'hero',
-      child: Padding(
-        padding: EdgeInsets.all(16.0),
-        child: CircleAvatar(
-          radius: 72.0,
-          backgroundColor: Colors.transparent,
-          backgroundImage: AssetImage('assets/alucard.jpg'),
-        ),
-      ),
-    );
-
-    final welcome = Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Welcome Alucard',
-        style: TextStyle(fontSize: 28.0, color: Colors.white),
-      ),
-    );
-
-    final lorem = Padding(
-      padding: EdgeInsets.all(8.0),
-      child: Text(
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec hendrerit condimentum mauris id tempor. Praesent eu commodo lacus. Praesent eget mi sed libero eleifend tempor. Sed at fringilla ipsum. Duis malesuada feugiat urna vitae convallis. Aliquam eu libero arcu.',
-        style: TextStyle(fontSize: 16.0, color: Colors.white),
-      ),
-    );
-
-    final body = Container(
-      width: MediaQuery.of(context).size.width,
-      padding: EdgeInsets.all(28.0),
-      decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [
-          Colors.blue,
-          Colors.lightBlueAccent,
-        ]),
-      ),
-      child: Column(
-        children: <Widget>[alucard, welcome, lorem],
-      ),
-    );
 
     return Scaffold(
       appBar: AppBar(
@@ -80,7 +41,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  Widget rowCard(BuildContext context, int index) {
+  /*Widget rowCard(BuildContext context, int index) {
     return Card(
       elevation: 4,
       child: Padding(
@@ -101,5 +62,36 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
-  }
-}
+  }*/
+  
+  Widget rowCard(BuildContext context, int index) {
+    return Card(
+      elevation: 4,
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FutureBuilder(future: getPhoto(index+1),builder: (BuildContext context, AsyncSnapshot<Photo> snapshot){
+        if(snapshot.hasData){
+          return ListTile(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => CardDetailPage(snapshot.data)
+              ),
+            );
+          },
+          leading: Text(snapshot.data.id.toString()),
+          title: Text(snapshot.data.title),
+          subtitle: Image.network(
+            snapshot.data.thumbnailUrl,
+          ),
+          trailing: Icon(Icons.arrow_forward_ios),
+          );
+        }
+        else{
+          return Center(child: CircularProgressIndicator());
+        }
+      }),
+      ),
+    );
+}}
