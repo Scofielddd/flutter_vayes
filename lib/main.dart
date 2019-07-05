@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
   final UserRepository userRepository;
 
   final routes = <String, WidgetBuilder>{
-    LoginPage.tag: (context) => LoginPage(),
+    //LoginPage.tag: (context) => LoginPage(),
     HomePage.tag: (context) => HomePage(),
     ForgetPasswordPage.tag: (context) => ForgetPasswordPage(),
     RegisterPage.tag: (context) => RegisterPage(),

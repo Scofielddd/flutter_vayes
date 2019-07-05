@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -9,7 +8,25 @@ import 'package:meta/meta.dart';
 
 class UserRepository {
   final storage = new FlutterSecureStorage();
-  final uri = "http://10.0.2.2:50567/api";
+  final String uri = "http://10.0.2.2:50567/api";  // you need to be change this port number (not ip adress)
+
+  Future<bool> checkAuthorization() async {
+      String readToken =await storage.read(key: "jwt");
+      var response = await http.get(Uri.encodeFull(uri+"/values/get/1"),
+      headers: {"Content-Type": "application/json",
+        "Authorization":"Bearer "+ readToken}
+      );
+      if(response.statusCode != 200)
+      {
+        print(response.statusCode);
+        return false;
+      }
+      else
+      {
+        print(response.statusCode);
+        return true;
+      }
+  }
 
   Future<String> authenticate({
     @required String username,

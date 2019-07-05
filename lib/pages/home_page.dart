@@ -1,41 +1,23 @@
+
 import 'package:flutter/material.dart';
-import 'package:flutter_vayes/data/remote_api.dart';
-import 'package:flutter_vayes/models/photo.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'card_detail_page.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:http/http.dart' as http;
+import 'package:flutter_vayes/data/user/user_repository.dart' ;
 
 import 'package:flutter_vayes/authentication/authentication.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
+  
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   final storage = new FlutterSecureStorage();
-   final uri = "http://10.0.2.2:50567/api";
+  String testText = "";
 
-
-  Future<bool> checkAuthorization() async {
-      String readToken =await storage.read(key: "jwt");
-      var response = await http.get(Uri.encodeFull(uri+"/values/get/1"),
-      headers: {"Content-Type": "application/json",
-        "Authorization":"Bearer "+ readToken}
-      );
-      if(response.statusCode != 200)
-      {
-        print(response.statusCode);
-        return false;
-      }
-      else
-      {
-        print(response.statusCode);
-        return true;
-      }
-  }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -56,9 +38,19 @@ class _HomePageState extends State<HomePage> {
             RaisedButton(
               child: Text("getlist"),
               onPressed: (){
-                checkAuthorization();
+                UserRepository ur = new UserRepository();
+                ur.checkAuthorization().then((x) => setState((){
+                  print(x.toString());
+                  if(x.toString() == "false")
+                  {
+                    testText = "You have not permission"; 
+                  }
+                  else
+                    testText = "You have permission";
+                }));
               },
-            )
+            ),
+            Text(testText),
           ],
           )
         )

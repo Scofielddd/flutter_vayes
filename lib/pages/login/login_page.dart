@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vayes/pages/home_page.dart';
-import 'package:flutter_vayes/pages/forget_password_page.dart';
-import 'package:flutter_vayes/pages/register_page.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vayes/data/user/user_repository.dart';
