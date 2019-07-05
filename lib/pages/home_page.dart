@@ -1,14 +1,81 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/data/remote_api.dart';
 import 'package:flutter_vayes/models/photo.dart';
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'card_detail_page.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:http/http.dart' as http;
 
-class HomePage extends StatelessWidget {
+import 'package:flutter_vayes/authentication/authentication.dart';
+
+class HomePage extends StatefulWidget {
+  static String tag = 'home-page';
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  final storage = new FlutterSecureStorage();
+   final uri = "http://10.0.2.2:50567/api";
+
+
+  Future<bool> checkAuthorization() async {
+      String readToken =await storage.read(key: "jwt");
+      var response = await http.get(Uri.encodeFull(uri+"/values/get/1"),
+      headers: {"Content-Type": "application/json",
+        "Authorization":"Bearer "+ readToken}
+      );
+      if(response.statusCode != 200)
+      {
+        print(response.statusCode);
+        return false;
+      }
+      else
+      {
+        print(response.statusCode);
+        return true;
+      }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final AuthenticationBloc authenticationBloc =
+        BlocProvider.of<AuthenticationBloc>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Home'),
+      ),
+      body: Container(
+        child: Center(
+          child: Column(children: <Widget>[
+            RaisedButton(
+              child: Text('logout'),
+              onPressed: () {
+                authenticationBloc.dispatch(LoggedOut());
+            }),
+            RaisedButton(
+              child: Text("getlist"),
+              onPressed: (){
+                checkAuthorization();
+              },
+            )
+          ],
+          )
+        )
+            
+      ),
+    );
+  }
+}
+
+
+/*class HomePage extends StatelessWidget {
   static String tag = 'home-page';
 
   @override
   Widget build(BuildContext context) {
+    final AuthenticationBloc authenticationBloc =
+        BlocProvider.of<AuthenticationBloc>(context);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,28 +108,6 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  /*Widget rowCard(BuildContext context, int index) {
-    return Card(
-      elevation: 4,
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListTile(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CardDetailPage(index)
-              ),
-            );
-          },
-          leading: Text("Head"),
-          title: Text("Title"),
-          subtitle: Text("Subsubsub"),
-          trailing: Icon(Icons.arrow_forward_ios),
-        ),
-      ),
-    );
-  }*/
   
   Widget rowCard(BuildContext context, int index) {
     return Card(
@@ -94,4 +139,4 @@ class HomePage extends StatelessWidget {
       }),
       ),
     );
-}}
+}}*/
