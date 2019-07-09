@@ -49,6 +49,7 @@ flutter:
   assets:
   - assets/logo.png
   - assets/alucard.jpg
+  - assets/vayes_logo.png
   fonts:
       - family: Nunito
         fonts:

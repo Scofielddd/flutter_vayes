@@ -71,8 +71,8 @@ class MyApp extends StatelessWidget {
       title: 'Vayes',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.lightBlue,
-        primaryColor: Colors.lightBlue[700],
+        primarySwatch: Colors.grey,
+        primaryColor: Colors.grey[50],
         fontFamily: 'Nunito',
       ),
       home: BlocBuilder<AuthenticationEvent, AuthenticationState>(

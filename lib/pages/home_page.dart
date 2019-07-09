@@ -26,6 +26,76 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Home'),
+        iconTheme: new IconThemeData(color: Colors.blue),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.settings, color: Colors.blue,),
+            tooltip: 'Menu',
+            onPressed: null,
+          ),
+        ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            DrawerHeader(
+              child: CircleAvatar(
+                    backgroundColor: Colors.transparent,
+                    radius: 54.0,
+                    child: Image.asset('assets/vayes_logo.png'),
+                  ),
+              decoration: BoxDecoration(
+                color: Colors.grey[100],
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.account_box,color: Colors.blue,),
+              title: Text('Hesabım'),
+              onTap: () {
+
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.add_a_photo, color: Colors.blue,),
+              title: Text('Medya Ekle'),
+              onTap: () {
+
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.perm_media, color: Colors.blue,),
+              title: Text('Galerim'),
+              onTap: () {
+
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.scatter_plot, color: Colors.blue,),
+              title: Text('Hesap Ayalarım'),
+              onTap: () {
+
+                Navigator.pop(context);
+              },
+            ),
+            ListTile(
+              isThreeLine: true,
+              subtitle: Text("username"),
+              contentPadding: EdgeInsets.only(top: 50, left: 20),
+              title: Text("Çıkış"),
+              leading: Icon(Icons.exit_to_app, color: Colors.blue),
+              onTap: (){
+                Navigator.pop(context);
+                authenticationBloc.dispatch(LoggedOut());
+              },
+            ),
+            
+            
+          ],
+        ),
       ),
       body: Container(
         child: Center(
