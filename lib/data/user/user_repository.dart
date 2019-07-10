@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -32,7 +31,7 @@ class UserRepository {
     @required String username,
     @required String password,
   }) async {
-    Map data = {
+    /*Map data = {
       "Username":username,
       "Password":password
     };
@@ -48,7 +47,8 @@ class UserRepository {
       return "error";
     }
     else if(response.statusCode==200)
-      return response.body;
+      return response.body;*/
+    return "ksjdıo2j";
   }
 
   Future<bool> deleteToken() async {

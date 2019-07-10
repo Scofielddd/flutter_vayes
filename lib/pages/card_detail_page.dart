@@ -8,8 +8,6 @@ class CardDetailPage extends StatelessWidget {
   CardDetailPage(photo){
     this.photo = photo;
   }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

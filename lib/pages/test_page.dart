@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 const baseUrl = "https://jsonplaceholder.typicode.com";
@@ -26,7 +25,7 @@ class _TestPageState extends State<TestPage> {
     );
 
     print(response.body);
-
+    return response.body;
   }
 
   @override

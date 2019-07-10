@@ -29,6 +29,8 @@ dependencies:
   meta: ^1.1.6
   equatable: ^0.2.0
   flutter_secure_storage: 3.2.1+1
+  image_picker: ^0.6.0+13
+  flutter_speed_dial: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -51,9 +53,9 @@ flutter:
   - assets/alucard.jpg
   - assets/vayes_logo.png
   fonts:
-      - family: Nunito
+      - family: OpenSans
         fonts:
-          - asset: assets/Nunito.ttf
+          - asset: assets/OpenSans-SemiBold.ttf
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
 import 'package:flutter_vayes/pages/register_page.dart';
+import 'package:flutter_vayes/pages/side_pages/take_photo.dart';
 import './pages/home_page.dart';
 import './pages/login/login_page.dart';
 import './pages/test_page.dart';
@@ -14,6 +15,7 @@ import 'package:flutter_vayes/pages/splash_page.dart';
 import 'package:flutter_vayes/pages/login/login.dart';
 import 'package:flutter_vayes/pages/home_page.dart';
 import 'package:flutter_vayes/pages/loading_indicator.dart';
+import 'package:flutter_vayes/pages/side_pages/account_page.dart';
 
 
 class SimpleBlocDelegate extends BlocDelegate {
@@ -57,6 +59,8 @@ class MyApp extends StatelessWidget {
 
   final routes = <String, WidgetBuilder>{
     //LoginPage.tag: (context) => LoginPage(),
+    TakePhoto.tag: (context) => TakePhoto(),
+    AccountPage.tag: (context) => AccountPage(),
     HomePage.tag: (context) => HomePage(),
     ForgetPasswordPage.tag: (context) => ForgetPasswordPage(),
     RegisterPage.tag: (context) => RegisterPage(),
@@ -73,7 +77,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.grey,
         primaryColor: Colors.grey[50],
-        fontFamily: 'Nunito',
+        fontFamily: 'OpenSans',
       ),
       home: BlocBuilder<AuthenticationEvent, AuthenticationState>(
         bloc: BlocProvider.of<AuthenticationBloc>(context),
@@ -90,6 +94,7 @@ class MyApp extends StatelessWidget {
           if (state is AuthenticationLoading) {
             return LoadingIndicator();
           }
+          return null;
         },
       ),
       routes: routes,
