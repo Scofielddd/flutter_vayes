@@ -20,123 +20,149 @@ class DrawerDynamic extends StatelessWidget {
     final AuthenticationBloc authenticationBloc =
         BlocProvider.of<AuthenticationBloc>(context);
     return new Drawer(
-        child: Padding(
-          padding: EdgeInsets.zero,
-          child: Column(
-            mainAxisSize: MainAxisSize.max,
-            children: <Widget>[
-              Center(
-                child: DrawerHeader(
-                  child: CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 100.0,
-                    child: Image.asset('assets/vayes_logo.png'),
-                  ),
-                  decoration: BoxDecoration(
-                    color: Colors.grey[50],
-                  ),
-                ),
-              ),
-              Container(
-                height: 1.5,
-                color: Colors.black26,
-              ),
-              Container(
-                color: Colors.grey[200],
-                child: ListTile(
-                  leading: Icon(
-                    Icons.home,
-                    color: Colors.blue,
-                  ),
-                  title: Text('Anasayfa'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, 'home-page');
-                  },
-                ),
-              ),
-              Container(
-                color: Colors.grey[200],
-                child: ListTile(
-                  leading: Icon(
-                    Icons.account_box,
-                    color: Colors.blue,
-                  ),
-                  title: Text('Hesabım'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, 'account-page');
-                  },
-                ),
-              ),
-              Container(
-                color: Colors.grey[200],
-                child: ListTile(
-                  leading: Icon(
-                    Icons.add_a_photo,
-                    color: Colors.blue,
-                  ),
-                  title: Text('Medya Ekle'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, 'take-photo-page');
-                  },
-                ),
-              ),
-              Container(
-                color: Colors.grey[200],
-                child: ListTile(
-                  leading: Icon(
-                    Icons.perm_media,
-                    color: Colors.blue,
-                  ),
-                  title: Text('Galerim'),
-                  onTap: () {
-                    Navigator.pop(context);
-                    Navigator.pushReplacementNamed(context, "gallery-page");
-                  },
-                ),
-              ),
-              Container(
-                color: Colors.grey[200],
-                child: ListTile(
-                  leading: Icon(
-                    Icons.scatter_plot,
-                    color: Colors.blue,
-                  ),
-                  title: Text('Hesap Ayalarım'),
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              Container(
-                height: 1.5,
-                color: Colors.black26,
-              ),
-              Expanded(
-                child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Container(
-                      color: Colors.grey[200],
-                      child: ListTile(
-                        //isThreeLine: true,
-                        subtitle: Text("username"),
-                        //contentPadding: EdgeInsets.only(top: 50, left: 20),
-
-                        title: Text("Çıkış"),
-                        leading: Icon(Icons.exit_to_app, color: Colors.red),
-                        onTap: () {
-                          Navigator.pop(context);
-                          authenticationBloc.dispatch(LoggedOut());
-                        },
+      child: Padding(
+        padding: EdgeInsets.zero,
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  Center(
+                    child: DrawerHeader(
+                      child: CircleAvatar(
+                        backgroundColor: Colors.transparent,
+                        radius: 100.0,
+                        child: Image.asset('assets/vayes_logo.png'),
                       ),
-                    )),
+                      decoration: BoxDecoration(
+                        color: Colors.grey[50],
+                      ),
+                    ),
+                  ),
+                  Container(
+                    height: 1.5,
+                    color: Colors.black26,
+                  ),
+                  Container(
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.home,
+                        color: Colors.blue,
+                      ),
+                      title: Text('Anasayfa'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, 'home-page');
+                      },
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.account_box,
+                        color: Colors.blue,
+                      ),
+                      title: Text('Hesabım'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, 'account-page');
+                      },
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.add_a_photo,
+                        color: Colors.blue,
+                      ),
+                      title: Text('Medya Ekle'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(
+                            context, 'take-photo-page');
+                      },
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.perm_media,
+                        color: Colors.blue,
+                      ),
+                      title: Text('Galerim'),
+                      onTap: () {
+                        Navigator.pop(context);
+                        Navigator.pushReplacementNamed(context, "gallery-page");
+                      },
+                    ),
+                  ),
+                  Container(
+                    color: Colors.grey[200],
+                    child: ListTile(
+                      leading: Icon(
+                        Icons.scatter_plot,
+                        color: Colors.blue,
+                      ),
+                      title: Text('Hesap Ayalarım'),
+                      onTap: () {
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ),
+                  Container(
+                    height: 1.5,
+                    color: Colors.black26,
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+            MediaQuery.of(context).orientation == Orientation.landscape
+                ? SliverToBoxAdapter(
+                  child: Container(
+                        color: Colors.grey[200],
+                        child: ListTile(
+                          //isThreeLine: true,
+                          subtitle: Text("username"),
+                          //contentPadding: EdgeInsets.only(top: 50, left: 20),
+
+                          title: Text("Çıkış"),
+                          leading: Icon(Icons.exit_to_app, color: Colors.red),
+                          onTap: () {
+                            Navigator.pop(context);
+                            authenticationBloc.dispatch(LoggedOut());
+                          },
+                        ),
+                      ),
+                )
+                : SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        color: Colors.grey[200],
+                        child: ListTile(
+                          //isThreeLine: true,
+                          subtitle: Text("username"),
+                          //contentPadding: EdgeInsets.only(top: 50, left: 20),
+
+                          title: Text("Çıkış"),
+                          leading: Icon(Icons.exit_to_app, color: Colors.red),
+                          onTap: () {
+                            Navigator.pop(context);
+                            authenticationBloc.dispatch(LoggedOut());
+                          },
+                        ),
+                      ),
+                    ),
+                  )
+          ],
         ),
-      );
+      ),
+    );
   }
 }
 
