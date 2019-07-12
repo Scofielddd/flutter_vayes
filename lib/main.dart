@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
 import 'package:flutter_vayes/pages/register_page.dart';
+import 'package:flutter_vayes/pages/side_pages/gallery_page.dart';
+import 'package:flutter_vayes/pages/side_pages/image_viewer_page.dart';
 import 'package:flutter_vayes/pages/side_pages/take_photo.dart';
 import './pages/home_page.dart';
 import './pages/login/login_page.dart';
@@ -60,6 +62,8 @@ class MyApp extends StatelessWidget {
   final routes = <String, WidgetBuilder>{
     //LoginPage.tag: (context) => LoginPage(),
     TakePhoto.tag: (context) => TakePhoto(),
+    GalleryPage.tag: (context) => GalleryPage(),
+    ImageViewerPage.tag: (context) => ImageViewerPage(),
     AccountPage.tag: (context) => AccountPage(),
     HomePage.tag: (context) => HomePage(),
     ForgetPasswordPage.tag: (context) => ForgetPasswordPage(),

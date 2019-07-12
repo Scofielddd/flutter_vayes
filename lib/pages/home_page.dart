@@ -1,15 +1,12 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_vayes/data/user/user_repository.dart' ;
 import 'package:flutter_vayes/pages/drawer_dynamic.dart';
-
 import 'package:flutter_vayes/authentication/authentication.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
-  
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -17,8 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final storage = new FlutterSecureStorage();
   String testText = "";
-
-  
 
   @override
   Widget build(BuildContext context) {
@@ -34,38 +29,35 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: DrawerDynamic(),
       body: Container(
-        child: Center(
-          child: Column(children: <Widget>[
-            RaisedButton(
-              child: Text('logout'),
-              onPressed: () {
-                authenticationBloc.dispatch(LoggedOut());
-            }),
-            RaisedButton(
-              child: Text("getlist"),
-              onPressed: (){
-                UserRepository ur = new UserRepository();
-                ur.checkAuthorization().then((x) => setState((){
-                  print(x.toString());
-                  if(x.toString() == "false")
-                  {
-                    testText = "You have not permission"; 
-                  }
-                  else
-                    testText = "You have permission";
-                }));
-              },
-            ),
-            Text(testText),
-          ],
-          )
-        )
-            
-      ),
+          child: Center(
+              child: Column(
+        children: <Widget>[
+          
+          
+          
+
+
+          /*
+          //check authorization
+          RaisedButton(
+            child: Text("getlist"),
+            onPressed: () {
+              UserRepository ur = new UserRepository();
+              ur.checkAuthorization().then((x) => setState(() {
+                    print(x.toString());
+                    if (x.toString() == "false") {
+                      testText = "You have not permission";
+                    } else
+                      testText = "You have permission";
+                  }));
+            },
+          ),*/
+          Text(testText),
+        ],
+      ))),
     );
   }
 }
-
 
 /*class HomePage extends StatelessWidget {
   static String tag = 'home-page';
