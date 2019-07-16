@@ -10,7 +10,7 @@ class ApplicationSettingsIcon extends StatelessWidget {
       icon: Icon(Icons.settings, color: Colors.blue),
       tooltip: 'Settings',
       onPressed: null,
-    );
+    ); 
   }
 }
 

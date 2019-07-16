@@ -41,114 +41,68 @@ class _LoginFormState extends State<LoginForm> {
           LoginState state,
         ) {
           return Scaffold(
-            appBar: new AppBar(
-              backgroundColor: Colors.transparent,
-              elevation: 0.0,
-              iconTheme: new IconThemeData(color: Color(0xFF18D191)),
-            ),
-            body: Container(
-              width: double.infinity,
-              child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundColor: Colors.transparent,
-                    radius: 90.0,
-                    child: Image.asset('assets/vayes_logo.png'),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(),
-                    child: Column(
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 0.0),
-                          child: new TextField(
-                            controller: _usernameController,
-                            decoration: new InputDecoration(labelText: 'Email'),
-                          ),
-                        ),
-                        new SizedBox(
-                          width: 12.0,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 20.0, vertical: 0.0),
-                          child: new TextField(
-                            controller: _passwordController,
-                            obscureText: true,
-                            decoration:
-                                new InputDecoration(labelText: 'Password'),
-                          ),
-                        ),
-                        new Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: state is! LoginLoading ? _onLoginButtonPressed : null,
-                                child: Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 20.0, right: 5.0, top: 10.0),
-                                  child: new Container(
-                                    alignment: Alignment.center,
-                                    height: 45.0,
-                                    decoration: new BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius:
-                                          new BorderRadius.circular(5.0),
-                                    ),
-                                    child: new Text(
-                                      "Login",
-                                      style: new TextStyle(
-                                          fontSize: 20.0, color: Colors.white),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 10.0, right: 20.0, top: 10.0),
-                                child: new Container(
-                                  alignment: Alignment.center,
-                                  height: 60.0,
-                                  child: new Text("Forgot Password?",
-                                      style: new TextStyle(
-                                          fontSize: 17.0, color: Colors.blue)),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
+              body: SafeArea(
+            child: ListView(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
+              children: <Widget>[
+                SizedBox(height: 80.0),
+                Column(
+                  children: <Widget>[
+                    Image.asset(
+                      'assets/vayes_logo.png',
+                      fit: BoxFit.fitWidth,
+                      height: 80,
+                      width: 250,
                     ),
+                    SizedBox(height: 16.0),
+                    //Text('VAYES PRIME'),
+                  ],
+                ),
+                SizedBox(height: 80.0),
+                TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    filled: true,
+                    labelText: 'Email',
+                    labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
                   ),
-                  Expanded(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 13.0),
-                          child: new Text("Create A New Account ",
-                              style: new TextStyle(
-                                  fontSize: 15.0,
-                                  color: Colors.blue,
-                                  fontWeight: FontWeight.bold)),
-                        ),
-                      ],
+                ),
+                SizedBox(height: 12.0),
+                TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelStyle: TextStyle(fontSize: 20.0, color: Colors.grey),
+                    filled: true,
+                    labelText: 'Şifre',
+                  ),
+                  obscureText: true,
+                ),
+                ButtonBar(
+                  children: <Widget>[
+                    FlatButton(
+                      child: Text('KAYIT OL'),
+                      onPressed: () {},
                     ),
-                  ),
-                  Container(
+                    RaisedButton(
+                      child: Text('İLERİ'),
+                      onPressed:
+                          state is! LoginLoading ? _onLoginButtonPressed : null,
+                    ),
+                  ],
+                ),
+                Center(
+                  child: Text("Şifremi Unuttum!",
+                      style:
+                          new TextStyle(fontSize: 13.0, color: Colors.black)),
+                ),
+                Container(
                   child: state is LoginLoading
                       ? CircularProgressIndicator()
                       : null,
                 ),
-                ],
-              ),
+              ],
             ),
-          );
+          ));
         },
       ),
     );

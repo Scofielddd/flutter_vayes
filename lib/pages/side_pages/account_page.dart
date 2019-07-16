@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vayes/pages/drawer_dynamic.dart';
+import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 
 class AccountPage extends StatefulWidget {
   static String tag = 'account-page';

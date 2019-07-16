@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_vayes/pages/drawer_dynamic.dart';
+import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'package:flutter_vayes/authentication/authentication.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
         BlocProvider.of<AuthenticationBloc>(context);
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: Text('Ana Sayfa'),
         iconTheme: new IconThemeData(color: Colors.blue),
         actions: <Widget>[
           ApplicationSettingsIcon(),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vayes/pages/drawer_dynamic.dart';
+import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'package:flutter_vayes/pages/side_pages/image_viewer_page.dart';
 
 class GalleryPage extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_vayes/pages/drawer_dynamic.dart';
+import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -60,7 +60,7 @@ class _TakePhotoState extends State<TakePhoto> {
       drawer: DrawerDynamic(),
       body: Center(
         child: _image == null
-            ? Text('No image selected.')
+            ? Text('Fotoğraf seçilmedi.')
             : Column(
                 children: <Widget>[
                   Expanded(
@@ -79,7 +79,7 @@ class _TakePhotoState extends State<TakePhoto> {
                             Expanded(
                               child: GestureDetector(
                                 onTap: () {
-                                  print("kes button pressed");
+                                  print("crop button pressed");
                                   if (_image != null)
                                     _cropImage();
                                   else
@@ -114,7 +114,12 @@ class _TakePhotoState extends State<TakePhoto> {
                             Expanded(
                               flex: 2,
                               child: GestureDetector(
-                                onTap: () => print("yükle"),
+                                onTap: () {
+                                              print("upload pressed");
+                                              setState(() {
+                                                _image = null;
+                                              });
+                                            },
                                 child: Padding(
                                   padding: const EdgeInsets.all(8.0),
                                   child: Container(
@@ -137,12 +142,7 @@ class _TakePhotoState extends State<TakePhoto> {
                                             MainAxisAlignment.center,
                                         children: <Widget>[
                                           GestureDetector(
-                                            onTap: () {
-                                              print("upload pressed");
-                                              setState(() {
-                                                _image = null;
-                                              });
-                                            },
+                                            
                                             child: Padding(
                                               padding: const EdgeInsets.only(
                                                   right: 12.0),

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
-import 'package:flutter_vayes/pages/register_page.dart';
+import 'package:flutter_vayes/pages/register/register_page.dart';
 import 'package:flutter_vayes/pages/side_pages/gallery_page.dart';
 import 'package:flutter_vayes/pages/side_pages/image_viewer_page.dart';
 import 'package:flutter_vayes/pages/side_pages/take_photo.dart';
