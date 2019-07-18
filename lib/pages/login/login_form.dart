@@ -48,17 +48,27 @@ class _LoginFormState extends State<LoginForm> {
                 SizedBox(height: 80.0),
                 Column(
                   children: <Widget>[
-                    Image.asset(
+                    /*Image.asset(
                       'assets/vayes_logo.png',
                       fit: BoxFit.fitWidth,
                       height: 80,
                       width: 250,
+                    ),*/
+                    Text(
+                      'vayes prime',textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 70,
+                          fontStyle: FontStyle.normal,
+                          fontWeight: FontWeight.bold,
+                          
+                          fontFamily: ("Playlines"),
+                          color: Color(0xff1b76b9)),
                     ),
                     SizedBox(height: 16.0),
-                    //Text('VAYES PRIME'),
+                    
                   ],
                 ),
-                SizedBox(height: 80.0),
+                SizedBox(height: 60.0),
                 TextField(
                   controller: _usernameController,
                   decoration: InputDecoration(

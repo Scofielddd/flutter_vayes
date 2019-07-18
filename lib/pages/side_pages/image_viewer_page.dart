@@ -10,21 +10,37 @@ class ImageViewerPage extends StatefulWidget {
 class _ImageViewerPageState extends State<ImageViewerPage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: PhotoView(
-        imageProvider: AssetImage('assets/vayes_logo.png'),
-        minScale: PhotoViewComputedScale.contained * 0.8,
-        // Covered = the smallest possible size to fit the whole screen
-        maxScale: PhotoViewComputedScale.covered * 2,
-        enableRotation: true,
-        // Set the background color to the "classic white"
-        backgroundDecoration: BoxDecoration(
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: PhotoView(
+            imageProvider: AssetImage('assets/vayes_logo.png'),
+            minScale: PhotoViewComputedScale.contained * 0.8,
+            // Covered = the smallest possible size to fit the whole screen
+            maxScale: PhotoViewComputedScale.covered * 2,
+            enableRotation: true,
+            // Set the background color to the "classic white"
+            backgroundDecoration: BoxDecoration(
+              color: Theme.of(context).canvasColor,
+            ),
+            loadingChild: Center(
+              child: CircularProgressIndicator(),
+            ),
+          ),
+        ),
+        Container(
           color: Theme.of(context).canvasColor,
+          child: ButtonBar(
+            alignment: MainAxisAlignment.start,
+            children: <Widget>[
+              RaisedButton(
+                child: Icon(Icons.arrow_back),
+                onPressed: () => Navigator.pop(context),
+              ),
+            ],
+          ),
         ),
-        loadingChild: Center(
-          child: CircularProgressIndicator(),
-        ),
-      ),
+      ],
     );
   }
 }

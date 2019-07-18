@@ -2,15 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_vayes/authentication/authentication.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_vayes/data/user/user_repository.dart';
+import 'package:flutter_vayes/pages/home_page.dart';
+import 'package:flutter_vayes/pages/login/login_page.dart';
 
 class ApplicationSettingsIcon extends StatelessWidget {
+  final Color blueFont = Color(0xff1b76b9);
   @override
   Widget build(BuildContext context) {
     return IconButton(
-      icon: Icon(Icons.settings, color: Colors.blue),
+      icon: Icon(Icons.settings, color: blueFont),
       tooltip: 'Settings',
       onPressed: null,
-    ); 
+    );
   }
 }
 
@@ -19,6 +23,7 @@ class DrawerDynamic extends StatelessWidget {
   Widget build(BuildContext context) {
     final AuthenticationBloc authenticationBloc =
         BlocProvider.of<AuthenticationBloc>(context);
+    final Color blueFont = Color(0xff1b76b9);
     return new Drawer(
       child: Padding(
         padding: EdgeInsets.zero,
@@ -29,10 +34,21 @@ class DrawerDynamic extends StatelessWidget {
                 [
                   Center(
                     child: DrawerHeader(
-                      child: CircleAvatar(
+                      child:
+                          /*CircleAvatar(
                         backgroundColor: Colors.transparent,
                         radius: 100.0,
                         child: Image.asset('assets/vayes_logo.png'),
+                      ),*/
+                          Text(
+                        'prime',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 80,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: ("Playlines"),
+                            color: blueFont),
                       ),
                       decoration: BoxDecoration(
                         color: Colors.grey[50],
@@ -48,12 +64,12 @@ class DrawerDynamic extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.home,
-                        color: Colors.blue,
+                        color: blueFont,
                       ),
                       title: Text('Anasayfa'),
                       onTap: () {
                         Navigator.pop(context);
-                        Navigator.pushReplacementNamed(context, 'home-page');
+                        Navigator.pushReplacement(context,new MaterialPageRoute(builder: (context) => new HomePage()));
                       },
                     ),
                   ),
@@ -62,7 +78,7 @@ class DrawerDynamic extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.account_box,
-                        color: Colors.blue,
+                        color: blueFont,
                       ),
                       title: Text('Hesabım'),
                       onTap: () {
@@ -76,7 +92,7 @@ class DrawerDynamic extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.add_a_photo,
-                        color: Colors.blue,
+                        color: blueFont,
                       ),
                       title: Text('Medya Ekle'),
                       onTap: () {
@@ -91,7 +107,7 @@ class DrawerDynamic extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.perm_media,
-                        color: Colors.blue,
+                        color: blueFont,
                       ),
                       title: Text('Galerim'),
                       onTap: () {
@@ -105,7 +121,7 @@ class DrawerDynamic extends StatelessWidget {
                     child: ListTile(
                       leading: Icon(
                         Icons.scatter_plot,
-                        color: Colors.blue,
+                        color: blueFont,
                       ),
                       title: Text('Hesap Ayalarım'),
                       onTap: () {
@@ -122,22 +138,22 @@ class DrawerDynamic extends StatelessWidget {
             ),
             MediaQuery.of(context).orientation == Orientation.landscape
                 ? SliverToBoxAdapter(
-                  child: Container(
-                        color: Colors.grey[200],
-                        child: ListTile(
-                          //isThreeLine: true,
-                          subtitle: Text("username"),
-                          //contentPadding: EdgeInsets.only(top: 50, left: 20),
+                    child: Container(
+                      color: Colors.grey[200],
+                      child: ListTile(
+                        //isThreeLine: true,
+                        subtitle: Text("username"),
+                        //contentPadding: EdgeInsets.only(top: 50, left: 20),
 
-                          title: Text("Çıkış"),
-                          leading: Icon(Icons.exit_to_app, color: Colors.red),
-                          onTap: () {
-                            Navigator.pop(context);
-                            authenticationBloc.dispatch(LoggedOut());
-                          },
-                        ),
+                        title: Text("Çıkış"),
+                        leading: Icon(Icons.exit_to_app, color: Colors.red),
+                        onTap: () {
+                          
+                          authenticationBloc.dispatch(LoggedOut());
+                        },
                       ),
-                )
+                    ),
+                  )
                 : SliverFillRemaining(
                     hasScrollBody: false,
                     child: Align(
@@ -154,6 +170,8 @@ class DrawerDynamic extends StatelessWidget {
                           onTap: () {
                             Navigator.pop(context);
                             authenticationBloc.dispatch(LoggedOut());
+                            Navigator.pushReplacement(context,new MaterialPageRoute(builder: (context) => new LoginPage(userRepository: UserRepository(),)));
+                            
                           },
                         ),
                       ),

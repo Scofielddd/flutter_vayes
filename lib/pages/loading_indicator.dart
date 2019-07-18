@@ -10,14 +10,29 @@ class LoadingIndicator extends StatelessWidget {
       ),
       body:Center(
         //width: double.infinity,
-        child: Column(
+        child: ListView(
           children: <Widget>[
-            CircleAvatar(
+            Text(
+                        'vayes prime',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontSize: 70,
+                            fontStyle: FontStyle.normal,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: ("Playlines"),
+                            color: Color(0xff1b76b9)),
+                      ),
+            /*CircleAvatar(
                     backgroundColor: Colors.transparent,
                     radius: 90.0,
                     child: Image.asset('assets/vayes_logo.png'),
-                  ),
-            CircularProgressIndicator(),
+                  ),*/
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 50),
+                child: CircularProgressIndicator(),
+              )
+            ),
           ],
         ),
       ));

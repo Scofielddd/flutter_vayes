@@ -14,6 +14,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   final storage = new FlutterSecureStorage();
   String testText = "";
+  final Color blueFont = Color(0xff1b76b9);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('Ana Sayfa'),
-        iconTheme: new IconThemeData(color: Colors.blue),
+        iconTheme: new IconThemeData(color: blueFont),
         actions: <Widget>[
           ApplicationSettingsIcon(),
         ],
@@ -32,11 +33,6 @@ class _HomePageState extends State<HomePage> {
           child: Center(
               child: Column(
         children: <Widget>[
-          
-          
-          
-
-
           /*
           //check authorization
           RaisedButton(

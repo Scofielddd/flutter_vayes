@@ -23,7 +23,7 @@ class _GalleryPageState extends State<GalleryPage> {
           Navigator.push(context,MaterialPageRoute(builder: (context) => ImageViewerPage()));
         },
               child: new Container(
-          child: new Image.asset(imageName, fit: BoxFit.fill),
+          child: new Image.asset(imageName, fit: BoxFit.fitWidth),
         ),
       );
     });
