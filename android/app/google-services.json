@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "30588014439",
+    "firebase_url": "https://mukkk-90eb2.firebaseio.com",
+    "project_id": "mukkk-90eb2",
+    "storage_bucket": "mukkk-90eb2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:30588014439:android:c15d38e81416d1fb",
+        "android_client_info": {
+          "package_name": "com.example.flutter_vayes"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "30588014439-ssgjlkdp3tl25c2poftgs2joqr0t2ipl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDG2jvtyyO7ehSIeQw5ACNwbAWETTMitt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "30588014439-ssgjlkdp3tl25c2poftgs2joqr0t2ipl.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "30588014439-qa6cujpdjhv5b87ei9daqtg6488lbov0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.flutterVayes"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

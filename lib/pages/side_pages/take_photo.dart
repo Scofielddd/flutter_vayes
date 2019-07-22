@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:flutter_vayes/photo_bloc/photo.dart';
 
 class TakePhoto extends StatefulWidget {
   static String tag = 'take-photo-page';
@@ -14,7 +16,6 @@ class TakePhoto extends StatefulWidget {
 
 class _TakePhotoState extends State<TakePhoto> {
   File _image;
-  
 
   Future getImage() async {
     var image = await ImagePicker.pickImage(source: ImageSource.camera);
@@ -47,6 +48,9 @@ class _TakePhotoState extends State<TakePhoto> {
 
   @override
   Widget build(BuildContext context) {
+
+    final _photoBloc = BlocProvider.of<PhotoBloc>(context);
+
     double width = MediaQuery.of(context).size.width;
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
@@ -64,109 +68,110 @@ class _TakePhotoState extends State<TakePhoto> {
             : Column(
                 children: <Widget>[
                   Expanded(
-                                      child: Padding(
+                    child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Container(
-                          constraints: BoxConstraints(maxHeight: height*2/3),
-                          child: Image.file(_image))),
+                            constraints:
+                                BoxConstraints(maxHeight: height * 2 / 3),
+                            child: Image.file(_image))),
                   ),
-                    Center(
-                      child: Padding(
-                        padding: const EdgeInsets.only(bottom: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Expanded(
-                              child: GestureDetector(
-                                onTap: () {
-                                  print("crop button pressed");
-                                  if (_image != null)
-                                    _cropImage();
-                                  else
-                                    print("_image is null");
-                                },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    height: 45.0,
-                                    decoration: new BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius:
-                                          new BorderRadius.circular(8.0),
-                                      boxShadow: [
-                                        new BoxShadow(
-                                          color: Colors.black,
-                                          offset: new Offset(20.0, 10.0),
-                                          blurRadius: 30.0,
-                                        )
-                                      ],
-                                    ),
-                                    child: new Text(
-                                      "Kes",
-                                      style: new TextStyle(
-                                          fontSize: 20.0, color: Colors.white),
-                                    ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Expanded(
+                            child: GestureDetector(
+                              onTap: () {
+                                print("crop button pressed");
+                                if (_image != null)
+                                  _cropImage();
+                                else
+                                  print("_image is null");
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  height: 45.0,
+                                  decoration: new BoxDecoration(
+                                    color: Colors.blue,
+                                    borderRadius:
+                                        new BorderRadius.circular(8.0),
+                                    boxShadow: [
+                                      new BoxShadow(
+                                        color: Colors.black,
+                                        offset: new Offset(20.0, 10.0),
+                                        blurRadius: 30.0,
+                                      )
+                                    ],
+                                  ),
+                                  child: new Text(
+                                    "Kes",
+                                    style: new TextStyle(
+                                        fontSize: 20.0, color: Colors.white),
                                   ),
                                 ),
                               ),
                             ),
-                            Expanded(
-                              flex: 2,
-                              child: GestureDetector(
-                                onTap: () {
-                                              print("upload pressed");
-                                              setState(() {
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: GestureDetector(
+                              onTap: () {
+                                print("upload pressed");
+                                _photoBloc.dispatch(PhotoUploadPressed(photo: _image.path,photoName:'photos/u'+new DateTime.now().toIso8601String()+'.jpg'));
+                                /*setState(() {
                                                 _image = null;
-                                              });
-                                            },
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      height: 45.0,
-                                      decoration: new BoxDecoration(
-                                        color: Colors.green,
-                                        borderRadius:
-                                            new BorderRadius.circular(5.0),
-                                        boxShadow: [
-                                          new BoxShadow(
-                                            color: Colors.black,
-                                            offset: new Offset(20.0, 10.0),
-                                            blurRadius: 20.0,
-                                          )
-                                        ],
-                                      ),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: <Widget>[
-                                          GestureDetector(
-                                            
-                                            child: Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 12.0),
-                                              child: Text(
-                                                "Yükle",
-                                                style: TextStyle(
-                                                    fontSize: 20.0,
-                                                    color: Colors.white),
-                                              ),
+                                });*/
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                    alignment: Alignment.center,
+                                    height: 45.0,
+                                    decoration: new BoxDecoration(
+                                      color: Colors.green,
+                                      borderRadius:
+                                          new BorderRadius.circular(5.0),
+                                      boxShadow: [
+                                        new BoxShadow(
+                                          color: Colors.black,
+                                          offset: new Offset(20.0, 10.0),
+                                          blurRadius: 20.0,
+                                        )
+                                      ],
+                                    ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: <Widget>[
+                                        GestureDetector(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                right: 12.0),
+                                            child: Text(
+                                              "Yükle",
+                                              style: TextStyle(
+                                                  fontSize: 20.0,
+                                                  color: Colors.white),
                                             ),
                                           ),
-                                          Icon(
-                                            Icons.file_upload,
-                                            color: Colors.white,
-                                          ),
-                                        ],
-                                      )),
-                                ),
+                                        ),
+                                        Icon(
+                                          Icons.file_upload,
+                                          color: Colors.white,
+                                        ),
+                                      ],
+                                    )),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     ),
+                  ),
                 ],
               ),
       ),

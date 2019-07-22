@@ -98,7 +98,7 @@ class DrawerDynamic extends StatelessWidget {
                       onTap: () {
                         Navigator.pop(context);
                         Navigator.pushReplacementNamed(
-                            context, 'take-photo-page');
+                            context, 'photo-page');
                       },
                     ),
                   ),
