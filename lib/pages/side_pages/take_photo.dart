@@ -48,7 +48,6 @@ class _TakePhotoState extends State<TakePhoto> {
 
   @override
   Widget build(BuildContext context) {
-
     final _photoBloc = BlocProvider.of<PhotoBloc>(context);
 
     double width = MediaQuery.of(context).size.width;
@@ -121,10 +120,14 @@ class _TakePhotoState extends State<TakePhoto> {
                             child: GestureDetector(
                               onTap: () {
                                 print("upload pressed");
-                                _photoBloc.dispatch(PhotoUploadPressed(photo: _image.path,photoName:'photos/u'+new DateTime.now().toIso8601String()+'.jpg'));
-                                /*setState(() {
-                                                _image = null;
-                                });*/
+                                _photoBloc.dispatch(PhotoUploadPressed(
+                                    photo: _image.path,
+                                    photoName: 'photos/u' +
+                                        new DateTime.now().toIso8601String() +
+                                        '.jpg'));
+                                setState(() {
+                                  _image = null;
+                                });
                               },
                               child: Padding(
                                 padding: const EdgeInsets.all(8.0),

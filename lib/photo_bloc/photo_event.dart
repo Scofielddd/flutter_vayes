@@ -20,3 +20,15 @@ class PhotoUploadPressed extends PhotoEvent{
   String toString() =>
       'UploadButtonPressed { photoName: $photoName, photo: $photo }';
 }
+
+class PhotosGetPressed extends PhotoEvent {
+  final String userGuid;
+
+  PhotosGetPressed({
+    @required this.userGuid,
+  }) : super([userGuid]);
+
+  @override
+  String toString() =>
+    'GetButtonPressed { userGuid: $userGuid}';
+}
