@@ -1,8 +1,13 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 
 class ImageViewerPage extends StatefulWidget {
   static String tag = 'image-viewer-page';
+  final Uint8List photo;
+  const ImageViewerPage({Key key,@required this.photo}) : super(key: key);
+
   @override
   _ImageViewerPageState createState() => _ImageViewerPageState();
 }
@@ -14,7 +19,7 @@ class _ImageViewerPageState extends State<ImageViewerPage> {
       children: <Widget>[
         Expanded(
           child: PhotoView(
-            imageProvider: AssetImage('assets/vayes_logo.png'),
+            imageProvider: MemoryImage(widget.photo),
             minScale: PhotoViewComputedScale.contained * 0.8,
             // Covered = the smallest possible size to fit the whole screen
             maxScale: PhotoViewComputedScale.covered * 2,
