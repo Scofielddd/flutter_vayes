@@ -8,7 +8,7 @@ import 'package:flutter_vayes/photo_bloc/photo_page.dart';
 import './pages/home_page.dart';
 import './pages/login/login_page.dart';
 import './pages/test_page.dart';
-
+import 'package:flutter/services.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vayes/data/user/user_repository.dart';
@@ -77,12 +77,14 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return MaterialApp(
       title: 'Vayes',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.grey,
         primaryColor: Colors.grey[50],
+        accentColor: Colors.blue,
+        brightness: Brightness.light,
         fontFamily: 'OpenSans',
       ),
       home: BlocBuilder<AuthenticationEvent, AuthenticationState>(

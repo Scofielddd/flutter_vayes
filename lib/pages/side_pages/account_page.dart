@@ -12,6 +12,7 @@ class _AccountPageState extends State<AccountPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text('Hesabım'),
         iconTheme: new IconThemeData(color: Colors.blue),
         actions: <Widget>[

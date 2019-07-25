@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_circular_chart/flutter_circular_chart.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sparkline/flutter_sparkline.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'package:flutter_vayes/authentication/authentication.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'package:flutter/services.dart';
 
 class HomePage extends StatefulWidget {
   static String tag = 'home-page';
@@ -15,14 +20,270 @@ class _HomePageState extends State<HomePage> {
   final storage = new FlutterSecureStorage();
   String testText = "";
   final Color blueFont = Color(0xff1b76b9);
+  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
+  var data1 = [
+    0.0,
+    -2.0,
+    3.5,
+    -2.0,
+    0.5,
+    0.7,
+    0.8,
+    1.0,
+    2.0,
+    3.0,
+    3.2,
+    0.8,
+    1.0,
+    2.0,
+    3.0,
+    3.2
+  ];
+
+  List<CircularStackEntry> circularData = <CircularStackEntry>[
+    new CircularStackEntry(
+      <CircularSegmentEntry>[
+        new CircularSegmentEntry(700.0, Color(0xff4285F4), rankKey: 'Q1'),
+        new CircularSegmentEntry(1000.0, Color(0xfff3af00), rankKey: 'Q2'),
+        new CircularSegmentEntry(1800.0, Color(0xffec3337), rankKey: 'Q3'),
+        new CircularSegmentEntry(1000.0, Color(0xff40b24b), rankKey: 'Q4'),
+      ],
+      rankKey: 'Quarterly Profits',
+    ),
+  ];
+
+  Material mychart1Items(String title, String priceVal, String subtitle) {
+    return Material(
+      color: Colors.white,
+      elevation: 2.0,
+      borderRadius: BorderRadius.circular(24.0),
+      shadowColor: Color(0x802196FF),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: blueFont,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      priceVal,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: new Sparkline(
+                      data: data,
+                      lineColor: Color(0xffff6101),
+                      pointsMode: PointsMode.all,
+                      pointSize: 8.0,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Material myCircularItems(String title, String subtitle) {
+    return Material(
+      color: Colors.white,
+      elevation: 2.0,
+      borderRadius: BorderRadius.circular(24.0),
+      shadowColor: Color(0x802196F3),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: blueFont,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: AnimatedCircularChart(
+                      size: const Size(100.0, 100.0),
+                      initialChartData: circularData,
+                      chartType: CircularChartType.Pie,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Material myTextItems(String title, String subtitle) {
+    return Material(
+      color: Colors.white,
+      elevation: 2.0,
+      borderRadius: BorderRadius.circular(24.0),
+      shadowColor: Color(0x802196F3),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: blueFont,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Material mychart2Items(String title, String priceVal, String subtitle) {
+    return Material(
+      color: Colors.white,
+      elevation: 2.0,
+      borderRadius: BorderRadius.circular(24.0),
+      shadowColor: Color(0x802196F3),
+      child: Center(
+        child: Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      title,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueAccent,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      priceVal,
+                      style: TextStyle(
+                        fontSize: 30.0,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: Text(
+                      subtitle,
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        color: Colors.blueGrey,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(1.0),
+                    child: new Sparkline(
+                      data: data1,
+                      fillMode: FillMode.below,
+                      fillGradient: new LinearGradient(
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                        colors: [Colors.amber[800], Colors.amber[200]],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     final AuthenticationBloc authenticationBloc =
         BlocProvider.of<AuthenticationBloc>(context);
+
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ana Sayfa'),
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        elevation: 0.0,
+        title: Text('Durum İzleme'),
         iconTheme: new IconThemeData(color: blueFont),
         actions: <Widget>[
           ApplicationSettingsIcon(),
@@ -30,27 +291,43 @@ class _HomePageState extends State<HomePage> {
       ),
       drawer: DrawerDynamic(),
       body: Container(
-          child: Center(
-              child: Column(
-        children: <Widget>[
-          /*
-          //check authorization
-          RaisedButton(
-            child: Text("getlist"),
-            onPressed: () {
-              UserRepository ur = new UserRepository();
-              ur.checkAuthorization().then((x) => setState(() {
-                    print(x.toString());
-                    if (x.toString() == "false") {
-                      testText = "You have not permission";
-                    } else
-                      testText = "You have permission";
-                  }));
-            },
-          ),*/
-          Text(testText),
-        ],
-      ))),
+        color: Colors.white,
+        child: StaggeredGridView.count(
+          crossAxisCount: 4,
+          crossAxisSpacing: 12.0,
+          mainAxisSpacing: 12.0,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.fromLTRB(8, 15, 8, 8),
+              child: mychart1Items(
+                  "Günlük Yükleme", "24", "+%15 haftaya göre artış"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: myCircularItems("Son 3 Aylık", "165"),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: myTextItems("Bu Aylık", "51"),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 8.0),
+              child: myTextItems("Toplam", "221"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: mychart2Items("Genel", "221", "+19% hedefin üzerinde"),
+            ),
+          ],
+          staggeredTiles: [
+            StaggeredTile.extent(4, 250.0),
+            StaggeredTile.extent(2, 250.0),
+            StaggeredTile.extent(2, 120.0),
+            StaggeredTile.extent(2, 120.0),
+            StaggeredTile.extent(4, 250.0),
+          ],
+        ),
+      ),
     );
   }
 }

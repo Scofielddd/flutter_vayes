@@ -25,7 +25,12 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
     } catch (e) {
       print(e);
     }
-    return list;
+    List<Uint8List> reversedList =new List(list.length);
+    for (int i =0;i<list.length ;i++) {
+      reversedList[i] = list[list.length-i-1];
+    }
+    list = null;
+    return reversedList;
   }
 
   @override
@@ -34,6 +39,7 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
     _photoBloc.dispatch(PhotosGetPressed(userGuid: "sda"));
     return Scaffold(
       appBar: AppBar(
+        elevation: 0.0,
         title: Text('Galerim'),
         iconTheme: new IconThemeData(color: Colors.blue),
         actions: <Widget>[
@@ -71,7 +77,7 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ImageViewerPage(photo:list[index])));
+                              builder: (context) => ImageViewerPage(photo:list[index],photoBloc: _photoBloc,)));
                     },
                     child: new Container(
                       child: new Image.memory(list[index],

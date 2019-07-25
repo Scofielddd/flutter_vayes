@@ -11,24 +11,45 @@ import 'package:bloc/bloc.dart';
 class PhotoBloc extends Bloc<PhotoEvent, PhotoState> {
   PhotoRepository photoRepository = new PhotoRepository();
 
+  
+
   @override
   PhotoState get initialState => PhotoUploadInitial();
 
   @override
+  void dispose(){
+    super.dispose();
+  }
+
+  @override
   Stream<PhotoState> mapEventToState(PhotoEvent event) async* {
+    
     if (event is PhotoUploadPressed) {
+      yield PhotoUploadInitial();
       yield PhotoUploadLoading();
 
       try {
+        Future.delayed(const Duration(seconds: 2));
         final isUploaded = await photoRepository.uploadPhoto(
             file: event.photo, fileName: event.photoName);
-        if (isUploaded) {
-          yield PhotoUploadInitial();
-        }
+        yield PhotoUploadLoaded();
+
       } catch (error) {
         yield PhotoUploadFailure(error: error.toString());
       }
     }
+
+    if(event is PhotoUploadClear)
+    {
+      yield PhotoUploadInitial();
+    }
+
+    if(event is PhotoSelected)
+    {
+      yield PhotoUploadSelected();
+    }
+
+
 
     if (event is PhotosGetPressed) {
       yield PhotoGetInitial();

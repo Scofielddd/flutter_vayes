@@ -11,9 +11,19 @@ class PhotoUploadInitial extends PhotoState{
   String toString() => 'PhotoUploadInitial';
 }
 
+class PhotoUploadSelected extends PhotoState{
+  @override
+  String toString() => 'PhotoUploadSelected';
+}
+
 class PhotoUploadLoading extends PhotoState{
   @override
   String toString() => 'PhotoUploadLoading';
+}
+
+class PhotoUploadLoaded extends PhotoState{
+  @override
+  String toString() => 'PhotoUploadLoaded';
 }
 
 class PhotoUploadFailure extends PhotoState{

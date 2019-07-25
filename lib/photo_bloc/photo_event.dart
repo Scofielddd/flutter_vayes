@@ -32,3 +32,13 @@ class PhotosGetPressed extends PhotoEvent {
   String toString() =>
     'GetButtonPressed { userGuid: $userGuid}';
 }
+
+class PhotoSelected extends PhotoEvent {
+  @override
+  String toString() => 'PhotoSelected';
+}
+
+class PhotoUploadClear extends PhotoEvent {
+  @override
+  String toString() => 'PhotoUploadClear';
+}
