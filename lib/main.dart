@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/forget_password_page.dart';
+import 'package:flutter_vayes/pages/public/class_builder.dart';
+import 'package:flutter_vayes/pages/public/drawer_main.dart';
 import 'package:flutter_vayes/pages/register/register_page.dart';
 import 'package:flutter_vayes/pages/side_pages/gallery_page.dart';
 import 'package:flutter_vayes/pages/side_pages/image_viewer_page.dart';
@@ -43,6 +45,7 @@ class SimpleBlocDelegate extends BlocDelegate {
 
 void main() {
   BlocSupervisor.delegate = SimpleBlocDelegate();
+  ClassBuilder.registerClasses();
   final userRepository = UserRepository();
   runApp(
     BlocProvider<AuthenticationBloc>(
@@ -94,7 +97,7 @@ class MyApp extends StatelessWidget {
             return SplashPage();
           }
           if (state is AuthenticationAuthenticated) {
-            return HomePage();
+            return MainWidget();
           }
           if (state is AuthenticationUnauthenticated) {
             return LoginPage(userRepository: userRepository);

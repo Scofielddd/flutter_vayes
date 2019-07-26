@@ -30,10 +30,12 @@ class PhotoRepository {
     @required String userGuid,
   }) async {
     try {
-      List <DocumentSnapshot> _photos = [];
-      Query q = Firestore.instance.collection("Photos").where('user_id',isEqualTo: 1);
+      List<DocumentSnapshot> _photos = [];
+      Query q = Firestore.instance
+          .collection("Photos")
+          .where('user_id', isEqualTo: 1);
       QuerySnapshot querySnapshot = await q.getDocuments();
-      _photos =  querySnapshot.documents;
+      _photos = querySnapshot.documents;
       return _photos;
     } catch (e) {
       print(e);

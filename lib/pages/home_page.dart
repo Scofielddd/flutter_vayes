@@ -8,9 +8,13 @@ import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
 import 'package:flutter_vayes/authentication/authentication.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/services.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends KFDrawerContent {
   static String tag = 'home-page';
+  HomePage({
+    Key key,
+  });
 
   @override
   _HomePageState createState() => _HomePageState();
@@ -279,7 +283,7 @@ class _HomePageState extends State<HomePage> {
         BlocProvider.of<AuthenticationBloc>(context);
 
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         backgroundColor: Colors.white,
         brightness: Brightness.light,
         elevation: 0.0,
@@ -288,8 +292,7 @@ class _HomePageState extends State<HomePage> {
         actions: <Widget>[
           ApplicationSettingsIcon(),
         ],
-      ),
-      drawer: DrawerDynamic(),
+      ),*/
       body: Container(
         color: Colors.white,
         child: StaggeredGridView.count(
@@ -297,6 +300,20 @@ class _HomePageState extends State<HomePage> {
           crossAxisSpacing: 12.0,
           mainAxisSpacing: 12.0,
           children: <Widget>[
+            ClipRRect(
+              borderRadius: BorderRadius.all(Radius.circular(32.0)),
+              child: Material(
+                shadowColor: Colors.transparent,
+                color: Colors.transparent,
+                child: IconButton(
+                  icon: Icon(
+                    Icons.menu,
+                    color: Colors.black,
+                  ),
+                  onPressed: widget.onMenuPressed,
+                ),
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 15, 8, 8),
               child: mychart1Items(
@@ -320,6 +337,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ],
           staggeredTiles: [
+            StaggeredTile.extent(1, 50.0),
             StaggeredTile.extent(4, 250.0),
             StaggeredTile.extent(2, 250.0),
             StaggeredTile.extent(2, 120.0),

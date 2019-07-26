@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
+import 'package:flutter_vayes/photo_bloc/photo_page.dart';
 import 'dart:async';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
@@ -9,9 +10,11 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:flutter_vayes/photo_bloc/photo.dart';
 import 'package:flutter_native_image/flutter_native_image.dart';
 import 'package:flutter/services.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
 class TakePhoto extends StatefulWidget {
   static String tag = 'take-photo-page';
+
   @override
   _TakePhotoState createState() => _TakePhotoState();
 }
@@ -60,7 +63,6 @@ class _TakePhotoState extends State<TakePhoto> {
 
   @override
   Widget build(BuildContext context) {
-    
     final _photoBloc = BlocProvider.of<PhotoBloc>(context);
     final snackBar = SnackBar(
         content: Text('Fotoğraf başarıyla yüklendi!'),
@@ -75,13 +77,19 @@ class _TakePhotoState extends State<TakePhoto> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
-        title: Text('Medya Ekle'),
         iconTheme: new IconThemeData(color: Colors.blue),
         actions: <Widget>[
           ApplicationSettingsIcon(),
+          IconButton(
+            onPressed: () {
+              Function x =PhotoPage.of(context).widget.onMenuPressed;
+              x();
+            },
+            icon: Icon(Icons.menu),
+          )
         ],
       ),
-      drawer: DrawerDynamic(),
+      //drawer: DrawerDynamic(),
       body: Center(
         child: BlocBuilder(
           bloc: _photoBloc,

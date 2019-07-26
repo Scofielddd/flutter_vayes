@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
-class AccountPage extends StatefulWidget {
+class AccountPage extends KFDrawerContent {
+  AccountPage({
+    Key key,
+  });
   static String tag = 'account-page';
   @override
   _AccountPageState createState() => _AccountPageState();
@@ -11,7 +15,7 @@ class _AccountPageState extends State<AccountPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      /*appBar: AppBar(
         backgroundColor: Color(0xff1b76b9).withOpacity(0.8),
         elevation: 0.0,
         title: Text('Hesabım'),
@@ -19,15 +23,32 @@ class _AccountPageState extends State<AccountPage> {
         actions: <Widget>[
           ApplicationSettingsIcon(),
         ],
-      ),
-      drawer: DrawerDynamic(),
+      ),*/
+      //drawer: DrawerDynamic(),
       body: new Stack(
         children: <Widget>[
+          
           ClipPath(
             child: Container(
               color: Color(0xff1b76b9).withOpacity(0.8),
             ),
             clipper: GetClipper(),
+          ),
+          SafeArea(
+                      child: ClipRRect(
+                borderRadius: BorderRadius.all(Radius.circular(32.0)),
+                child: Material(
+                  shadowColor: Colors.transparent,
+                  color: Colors.transparent,
+                  child: IconButton(
+                    icon: Icon(
+                      Icons.menu,
+                      color: Colors.black,
+                    ),
+                    onPressed: widget.onMenuPressed,
+                  ),
+                ),
+              ),
           ),
           Positioned(
             width: 400.0,

@@ -4,12 +4,18 @@ import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' as prefix0;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_vayes/pages/public/drawer_dynamic.dart';
+import 'package:flutter_vayes/pages/side_pages/gallery_page.dart';
 import 'package:flutter_vayes/pages/side_pages/image_viewer_page.dart';
 import 'package:flutter_vayes/photo_bloc/photo.dart';
+import 'package:kf_drawer/kf_drawer.dart';
 
-class GalleryBuilder extends StatefulWidget {
+class GalleryBuilder extends KFDrawerContent {
+  GalleryBuilder({
+    Key key,
+  });
   @override
   _GalleryBuilderState createState() => _GalleryBuilderState();
 }
@@ -25,9 +31,9 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
     } catch (e) {
       print(e);
     }
-    List<Uint8List> reversedList =new List(list.length);
-    for (int i =0;i<list.length ;i++) {
-      reversedList[i] = list[list.length-i-1];
+    List<Uint8List> reversedList = new List(list.length);
+    for (int i = 0; i < list.length; i++) {
+      reversedList[i] = list[list.length - i - 1];
     }
     list = null;
     return reversedList;
@@ -43,10 +49,17 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
         title: Text('Galerim'),
         iconTheme: new IconThemeData(color: Colors.blue),
         actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              Function x =GalleryPage.of(context).widget.onMenuPressed;
+              x();
+            },
+          ),
           ApplicationSettingsIcon(),
         ],
       ),
-      drawer: DrawerDynamic(),
+      //drawer: DrawerDynamic(),
       body: Center(
         child: BlocBuilder(
           bloc: _photoBloc,
@@ -77,11 +90,14 @@ class _GalleryBuilderState extends State<GalleryBuilder> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ImageViewerPage(photo:list[index],photoBloc: _photoBloc,)));
+                              builder: (context) => ImageViewerPage(
+                                    photo: list[index],
+                                    photoBloc: _photoBloc,
+                                  )));
                     },
                     child: new Container(
-                      child: new Image.memory(list[index],
-                          fit: BoxFit.fitWidth),
+                      child:
+                          new Image.memory(list[index], fit: BoxFit.fitWidth),
                     ),
                   );
                 }), //Where is this function ?
